@@ -1,6 +1,6 @@
 <?php
 // register
-require_once $_SERVER['DOCUMENT_ROOT'] . '/rekomendasi-laptop/includes/register_controller.php';
+require 'includes/register_controller.php';
 
 ?>
 
@@ -73,6 +73,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/rekomendasi-laptop/includes/register_
                                                 </div>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="token" value="<?php echo $token; ?>" />
 
                                         <button class="btn btn-primary btn-user btn-block" type="submit" name="submit">
                                             Register
