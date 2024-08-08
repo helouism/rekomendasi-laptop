@@ -1,6 +1,6 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . '/rekomendasi-laptop/config/config.php');
-require_once "includes/CSRF.php";
+
 session_start();
 
 if (empty($_SESSION['token'])) {
