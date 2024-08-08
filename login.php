@@ -1,7 +1,7 @@
 <?php
+
 // login
-require_once 'includes/login_controller.php';
-require_once "includes/CSRF.php";
+require 'includes/login_controller.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,11 +48,12 @@ require_once "includes/CSRF.php";
                                         <h1 class="h4 text-gray-900 mb-4">Login</h1>
                                     </div>
                                     <form action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>" method="POST" class="user">
+                                       
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="username" name="username" value="" placeholder="Masukkan Username..." maxlength="10" autofocus autocomplete="off" required>
                                         </div>
-                                        <!-- Mengambil function buat csrf token -->
-                                        <?php CSRF::create_token(); ?>
+                                       
+                                        
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input type="password" class="form-control form-control-user" id="password" name="password" value="" autocomplete="off" placeholder="Masukkan Password" required>
@@ -63,6 +64,7 @@ require_once "includes/CSRF.php";
                                                 </div>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="token" value="<?php echo $token; ?>" />
 
                                         <button class="btn btn-primary btn-user btn-block" type="submit" name="login">
                                             Login
