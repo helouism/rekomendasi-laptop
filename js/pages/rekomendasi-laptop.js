@@ -46,6 +46,7 @@ function getRecommendations() {
             model_name: "",
             price: "",
             image_url: "",
+            id_laptop: null,
           })
           .draw();
       } else {
@@ -180,17 +181,18 @@ $(document).ready(function () {
   // View Details button click handler
   $("#recommendationsTable").on("click", ".view-details", function () {
     const laptopData = JSON.parse($(this).attr("data-laptop"));
-    const isBookmarked = userBookmarks.includes(laptopData.id_laptop);
-    const bookmarkButtonHtml = isBookmarked
-      ? `<button class="btn btn-secondary btn-sm" disabled>Sudah dibookmark</button>`
-      : `<button class="btn btn-secondary btn-sm bookmark-laptop" data-laptop-id="${laptopData.id_laptop}">Bookmark</button>`;
+    if (laptopData.id_laptop !== null) {
+      const isBookmarked = userBookmarks.includes(laptopData.id_laptop);
+      const bookmarkButtonHtml = isBookmarked
+        ? `<button class="btn btn-secondary btn-sm" disabled>Sudah dibookmark</button>`
+        : `<button class="btn btn-secondary btn-sm bookmark-laptop" data-laptop-id="${laptopData.id_laptop}">Bookmark</button>`;
 
-    const detailsHtml = `
+      const detailsHtml = `
     <div class="row">
         <div class="col-md-4">
             <img src="${laptopData.image_url}" alt="${laptopData.brand_name} ${
-      laptopData.model_name
-    }" class="img-fluid">
+        laptopData.model_name
+      }" class="img-fluid">
         </div>
         <div class="col-md-8">
             <h4>${laptopData.brand_name} ${laptopData.model_name}</h4>
@@ -212,7 +214,14 @@ $(document).ready(function () {
         </div>
     </div>
 `;
-    $("#laptopDetailsContent").html(detailsHtml);
-    $("#laptopDetailsModal").modal("show");
+      $("#laptopDetailsContent").html(detailsHtml);
+      $("#laptopDetailsModal").modal("show");
+    } else {
+      // Display a message or handle the case where there are no matching laptops
+      $("#laptopDetailsContent").html(
+        "<p>Tidak ada laptop yang sesuai kriteria untuk menampilkan spesifikasi.</p>"
+      );
+      $("#laptopDetailsModal").modal("show");
+    }
   });
 });
