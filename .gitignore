@@ -1,0 +1,5 @@
+.htaccess
+.env
+vendor
+node_modules
+scss
